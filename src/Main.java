@@ -24,14 +24,18 @@ public class Main {
             2026
         );
 
+        EligibilityRule percentageRule = new PercentageRule();
+        EligibilityRule backlogRule = new BacklogRule();
+        EligibilityRule yearRule = new GraduationYearRule();
+
         boolean percentagePass = 
-            candidate.getPercentage() >= job.getMinimumPercentage();
+            percentageRule.check(candidate,job);
 
         boolean backlogPass = 
-            candidate.getBacklogs() <= job.getMaximumBacklogs();
+            backlogRule.check(candidate, job);
 
         boolean yearPass = 
-            candidate.getGraduationYear() == job.getMinimumPercentage();
+            yearRule.check(candidate, job);
 
         boolean eligible =
             percentagePass && backlogPass && yearPass;
